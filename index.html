@@ -512,7 +512,7 @@
 
     <!-- Footer -->
     <footer id="iletisim" class="bg-slate-950 text-slate-400 py-20 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div class="max-w-7xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
             <div class="space-y-5">
                 <a href="#" class="flex items-center gap-3">
                     <img src="nscs-logo-beyaz.png" alt="NSCSTR Logo" class="h-16 w-auto object-contain">
@@ -560,6 +560,17 @@
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-earth-europe text-brand-500"></i><span data-i18n="ftr_scope">Türkiye &amp; Uluslararası Danışmanlık</span></li>
                 </ul>
             </div>
+
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4" data-i18n="ftr_legal">Yasal</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><button onclick="openLegal('kvkk')" class="hover:text-brand-500 transition text-left" data-i18n="lg_kvkk_t">KVKK Aydınlatma Metni</button></li>
+                    <li><button onclick="openLegal('privacy')" class="hover:text-brand-500 transition text-left" data-i18n="lg_privacy_t">Gizlilik Politikası</button></li>
+                    <li><button onclick="openLegal('cookie')" class="hover:text-brand-500 transition text-left" data-i18n="lg_cookie_t">Çerez Politikası</button></li>
+                    <li><button onclick="openLegal('terms')" class="hover:text-brand-500 transition text-left" data-i18n="lg_terms_t">Kullanım Koşulları</button></li>
+                    <li><button onclick="openLegal('rights')" class="hover:text-brand-500 transition text-left" data-i18n="lg_rights_t">Veri Sahibi Başvurusu</button></li>
+                </ul>
+            </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-6 mt-16 pt-8 border-t border-slate-900 text-xs text-slate-600 flex flex-col md:flex-row items-center justify-between gap-5">
@@ -580,6 +591,18 @@
     <button id="scrollToTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-50 bg-brand-600 text-white w-12 h-12 rounded-full shadow-2xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hover:bg-brand-700 hover:scale-110 focus:outline-none">
         <i class="fa-solid fa-arrow-up text-lg"></i>
     </button>
+
+
+    <!-- Yasal metinler -->
+    <div id="legalModal" class="fixed inset-0 z-[60] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 md:p-8" onclick="if(event.target===this)closeLegal()">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full max-h-[88vh] overflow-y-auto p-6 md:p-10 relative shadow-2xl">
+            <button onclick="closeLegal()" class="absolute top-5 right-5 w-10 h-10 bg-slate-800 text-slate-300 rounded-full flex items-center justify-center hover:bg-brand-600 hover:text-white transition" aria-label="Kapat"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 id="legalTitle" class="text-xl md:text-2xl font-extrabold text-white mb-5 pr-10"></h3>
+            <div id="legalBody" class="legal-body text-sm text-slate-300 leading-relaxed"></div>
+            <p class="mt-6 text-[11px] text-slate-500" id="legalFoot"></p>
+        </div>
+    </div>
+    <style>.legal-body h4{color:#fff;font-weight:700;font-size:.8rem;margin:1.1rem 0 .3rem;letter-spacing:.02em}.legal-body p{color:#94a3b8;font-size:.8rem}</style>
 
     <!-- Certificate Modal -->
     <div id="certModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4 md:p-8 overflow-y-auto">
@@ -770,6 +793,19 @@
             });
         }
 
+
+        const LEGAL = {"kvkk": {"tr": {"t": "KVKK Aydınlatma Metni", "h": "<h4>Veri sorumlusu</h4><p>NSCSTR (bundan sonra “NSCSTR”), 6698 sayılı Kişisel Verilerin Korunması Kanunu (“KVKK”) uyarınca veri sorumlusudur. İletişim: info@nscstr.com</p><h4>İşlenen kişisel veriler</h4><p>Web sitesindeki “Ücretsiz Ön Analiz Talebi” formu aracılığıyla ilettiğiniz ad soyad ve firma adı, e-posta adresi, ilgilendiğiniz hizmet alanı ile iletişim sırasında paylaştığınız diğer bilgiler.</p><h4>İşleme amaçları</h4><p>Talebinizin değerlendirilmesi ve yanıtlanması, ön analiz ve teklif sürecinin yürütülmesi, sizinle iletişime geçilmesi, hizmetlerimizin sunulması ve yasal yükümlülüklerin yerine getirilmesi.</p><h4>Hukuki sebepler</h4><p>KVKK m.5/2-c (bir sözleşmenin kurulması veya ifasıyla doğrudan ilgili olması), m.5/2-ç (hukuki yükümlülük) ve m.5/2-f (meşru menfaat). Bunların dışındaki işlemeler için açık rızanız alınır.</p><h4>Toplama yöntemi</h4><p>Web sitesindeki form, e-posta ve telefon/mesajlaşma kanalları.</p><h4>Aktarım</h4><p>Verileriniz, hizmetin sunulması için gerekli olduğu ölçüde form ve e-posta altyapısı ile barındırma hizmeti sağlayıcılarına aktarılabilir. Bu sağlayıcıların bir kısmı yurt dışında bulunabilir; aktarımlar KVKK m.8 ve m.9 hükümlerine uygun yapılır.</p><h4>Saklama süresi</h4><p>Verileriniz, işleme amacının gerektirdiği süre ve ilgili mevzuatta öngörülen süreler boyunca saklanır, süre sonunda silinir, yok edilir veya anonim hale getirilir.</p><h4>Haklarınız (KVKK m.11)</h4><p>Kişisel verinizin işlenip işlenmediğini öğrenme; işlenmişse bilgi talep etme; amacını ve amaca uygun kullanılıp kullanılmadığını öğrenme; aktarıldığı kişileri bilme; eksik veya yanlış işlenmişse düzeltilmesini isteme; silinmesini veya yok edilmesini isteme; bu işlemlerin aktarıldığı üçüncü kişilere bildirilmesini isteme; otomatik sistemlerle analiz sonucu aleyhinize bir sonuca itiraz etme; kanuna aykırı işleme nedeniyle zarar görmeniz hâlinde zararın giderilmesini talep etme.</p><h4>Başvuru</h4><p>Haklarınıza ilişkin taleplerinizi info@nscstr.com adresine, kimliğinizi doğrulayacak bilgilerle iletebilirsiniz. Başvurular en geç 30 gün içinde yanıtlanır.</p>"}, "en": {"t": "Personal Data Notice (KVKK)", "h": "<h4>Data controller</h4><p>NSCSTR is the data controller under Türkiye’s Personal Data Protection Law no. 6698 (KVKK). Contact: info@nscstr.com</p><h4>Data we process</h4><p>Name or company name, e-mail address, selected service area and any other information you share through the “Free Pre-Analysis Request” form or while contacting us.</p><h4>Purposes</h4><p>Evaluating and answering your request, running the pre-analysis and quotation process, contacting you, providing our services and meeting legal obligations.</p><h4>Legal grounds</h4><p>KVKK Art. 5/2-c (performance of a contract), 5/2-ç (legal obligation) and 5/2-f (legitimate interests). Other processing relies on your explicit consent.</p><h4>Transfers</h4><p>Your data may be shared with form, e-mail and hosting providers as needed to deliver the service; some providers may be located abroad. Transfers comply with KVKK Articles 8 and 9.</p><h4>Retention</h4><p>Data is kept for as long as the purpose requires and as set by law, then deleted, destroyed or anonymised.</p><h4>Your rights (Art. 11)</h4><p>You may learn whether your data is processed, request information, learn the purpose and recipients, request correction, deletion or destruction, object to results of automated analysis and claim compensation for damage caused by unlawful processing.</p><h4>How to apply</h4><p>Write to info@nscstr.com with details that verify your identity. We answer within 30 days.</p>"}}, "privacy": {"tr": {"t": "Gizlilik Politikası", "h": "<h4>Kapsam</h4><p>Bu politika, nscstr.com web sitesini kullanırken kişisel verilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.</p><h4>Topladığımız bilgiler</h4><p>Yalnızca formu doldurduğunuzda ilettiğiniz bilgileri (ad soyad ve firma adı, e-posta, hizmet alanı) ve sitenin teknik olarak çalışması için sunucu kayıtlarında oluşan IP adresi gibi bilgileri.</p><h4>Kullanım</h4><p>Bilgileriniz yalnızca talebinize yanıt vermek, teklif hazırlamak ve sizinle iletişim kurmak için kullanılır. Üçüncü kişilere pazarlama amacıyla satılmaz ve kiralanmaz.</p><h4>Güvenlik</h4><p>Verilerinizin korunması için makul teknik ve idari tedbirler uygulanır. Ancak internet üzerinden yapılan iletimin tamamen risksiz olduğu garanti edilemez.</p><h4>Dış bağlantılar</h4><p>Sitemiz LinkedIn, Instagram, Facebook, WhatsApp ve NSCS Portal gibi dış sitelere bağlantılar içerir. Bu sitelerin gizlilik uygulamalarından NSCSTR sorumlu değildir.</p><h4>İletişim</h4><p>Sorularınız için: info@nscstr.com</p>"}, "en": {"t": "Privacy Policy", "h": "<h4>Scope</h4><p>This policy explains how personal data is collected, used and protected when you use nscstr.com.</p><h4>Information we collect</h4><p>Only what you submit in the form (name or company, e-mail, service area) and technical data such as the IP address in server logs.</p><h4>Use</h4><p>Your information is used only to answer your request, prepare quotations and contact you. It is never sold or rented for marketing.</p><h4>Security</h4><p>We apply reasonable technical and organisational measures; however, no transmission over the internet is fully risk-free.</p><h4>External links</h4><p>The site links to LinkedIn, Instagram, Facebook, WhatsApp and NSCS Portal. NSCSTR is not responsible for their privacy practices.</p><h4>Contact</h4><p>info@nscstr.com</p>"}}, "cookie": {"tr": {"t": "Çerez Politikası", "h": "<h4>Genel bilgi</h4><p>Çerezler, ziyaret ettiğiniz sitelerin cihazınıza yerleştirdiği küçük metin dosyalarıdır.</p><h4>Sitemizdeki durum</h4><p>Sitemiz kendi çerezlerini veya tarayıcı yerel depolamasını kullanmaz; analitik, reklam veya izleme çerezi bulunmaz. Bu nedenle çerez onay bandı gerekmez.</p><h4>Üçüncü taraf kaynaklar</h4><p>Sayfaların görünümü için Google Fonts, Cloudflare (cdnjs), Tailwind CSS ve Unsplash gibi üçüncü taraf sunuculardan yazı tipi, stil ve görsel yüklenir. Bu sunucular bağlantı sırasında IP adresinizi ve tarayıcı bilgilerinizi görebilir. İletişim formu, FormSubmit hizmeti üzerinden e-postaya iletilir.</p><h4>Tercihleriniz</h4><p>Tarayıcı ayarlarınızdan çerezleri silebilir veya engelleyebilirsiniz.</p>"}, "en": {"t": "Cookie Policy", "h": "<h4>General</h4><p>Cookies are small text files that websites place on your device.</p><h4>Our site</h4><p>This site does not use its own cookies or browser storage, and has no analytics, advertising or tracking cookies; a cookie consent banner is therefore not required.</p><h4>Third-party resources</h4><p>Fonts, styles and images are loaded from third-party servers such as Google Fonts, Cloudflare (cdnjs), Tailwind CSS and Unsplash, which may see your IP address and browser data. The contact form is delivered by e-mail through FormSubmit.</p><h4>Your choices</h4><p>You can delete or block cookies in your browser settings.</p>"}}, "terms": {"tr": {"t": "Kullanım Koşulları", "h": "<h4>Kabul</h4><p>Bu siteyi kullanarak aşağıdaki koşulları kabul etmiş sayılırsınız.</p><h4>İçerik</h4><p>Sitedeki bilgiler genel bilgilendirme amaçlıdır; bağlayıcı bir teklif veya hukuki, mali danışmanlık niteliği taşımaz. Sertifika ve standart adları ilgili kuruluşlara aittir.</p><h4>Fikri mülkiyet</h4><p>Sitedeki logo, metin, tasarım ve diğer içerikler NSCSTR’ye aittir; izinsiz kopyalanamaz, çoğaltılamaz veya ticari amaçla kullanılamaz.</p><h4>Sorumluluk</h4><p>Site özenle hazırlanır; ancak içeriğin her zaman eksiksiz, güncel ve kesintisiz erişilebilir olması garanti edilmez. Dış bağlantılardaki içeriklerden sorumluluk kabul edilmez.</p><h4>Değişiklik</h4><p>NSCSTR bu koşulları ve site içeriğini önceden bildirmeksizin güncelleyebilir.</p><h4>Uygulanacak hukuk</h4><p>Bu koşullar Türkiye Cumhuriyeti hukukuna tabidir.</p>"}, "en": {"t": "Terms of Use", "h": "<h4>Acceptance</h4><p>By using this site you accept these terms.</p><h4>Content</h4><p>Information is for general purposes only and is neither a binding offer nor legal or financial advice. Certificate and standard names belong to their owners.</p><h4>Intellectual property</h4><p>Logos, text, design and other content belong to NSCSTR and may not be copied or used commercially without permission.</p><h4>Liability</h4><p>The site is prepared with care, but completeness, currency and uninterrupted access are not guaranteed. No liability is accepted for external content.</p><h4>Changes</h4><p>NSCSTR may update these terms and the site without notice.</p><h4>Governing law</h4><p>These terms are governed by the laws of the Republic of Türkiye.</p>"}}, "rights": {"tr": {"t": "Veri Sahibi Başvurusu", "h": "<h4>Nasıl başvurulur?</h4><p>KVKK m.11 kapsamındaki haklarınızı kullanmak için info@nscstr.com adresine “KVKK Başvurusu” konulu bir e-posta gönderin.</p><h4>Başvuruda bulunması gerekenler</h4><p>Ad soyad, iletişim bilgisi (e-posta/telefon), talebinizin açık ve anlaşılır açıklaması ve kimliğinizi doğrulayan bilgi. Başkası adına başvuruda yetki belgesi gerekir.</p><h4>Yanıt süresi</h4><p>Başvurunuz, talebin niteliğine göre en geç 30 gün içinde ücretsiz sonuçlandırılır. İşlemin ayrıca maliyet gerektirmesi hâlinde Kurul tarafından belirlenen tarife uygulanabilir.</p><h4>Şikâyet hakkı</h4><p>Başvurunuza verilen yanıtı yetersiz bulursanız ya da yanıt alamazsanız, Kişisel Verileri Koruma Kurumu’na şikâyette bulunabilirsiniz.</p>"}, "en": {"t": "Data Subject Request", "h": "<h4>How to apply</h4><p>To exercise your rights under KVKK Art. 11, send an e-mail titled “KVKK Request” to info@nscstr.com.</p><h4>What to include</h4><p>Full name, contact details, a clear description of your request and information verifying your identity. A power of attorney is required when applying for someone else.</p><h4>Response time</h4><p>Requests are concluded free of charge within 30 days at most, depending on the nature of the request.</p><h4>Right to complain</h4><p>If you find the answer insufficient or receive none, you may complain to the Personal Data Protection Authority.</p>"}}};
+        function openLegal(k) {
+            const lg = (document.documentElement.lang || 'tr'), d = (LEGAL[k] && (LEGAL[k][lg] || LEGAL[k].en || LEGAL[k].tr));
+            if (!d) return;
+            document.getElementById('legalTitle').textContent = d.t;
+            document.getElementById('legalBody').innerHTML = d.h;
+            document.getElementById('legalFoot').textContent = (lg === 'tr' ? 'Son güncelleme: 17.11.2026' : 'Last updated: 17.11.2026');
+            const m = document.getElementById('legalModal'); m.classList.remove('hidden'); m.classList.add('flex');
+        }
+        function closeLegal() { const m = document.getElementById('legalModal'); m.classList.add('hidden'); m.classList.remove('flex'); }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLegal(); });
+
         const translations = {
             tr: {
                 logo_slogan: "Sürdürülebilirlik & Denetim",
@@ -783,6 +819,12 @@
                 ftr_portal_short: "NSCS Portal →",
                 ftr_tagline: "Kurumsal Sürdürülebilirlik & Denetim Danışmanlığı",
                 ftr_services: "Hizmetlerimiz",
+                ftr_legal: "Yasal",
+                lg_kvkk_t: "KVKK Aydınlatma Metni",
+                lg_privacy_t: "Gizlilik Politikası",
+                lg_cookie_t: "Çerez Politikası",
+                lg_terms_t: "Kullanım Koşulları",
+                lg_rights_t: "Veri Sahibi Başvurusu",
                 ftr_whatsapp: "WhatsApp ile yazın",
                 ftr_address: "İkinci Yeni Kahire, Kahire, Mısır",
                 ftr_scope: "Türkiye & Uluslararası Danışmanlık",
@@ -823,6 +865,12 @@
                 ftr_portal_short: "NSCS Portal →",
                 ftr_tagline: "Corporate Sustainability & Audit Consultancy",
                 ftr_services: "Our Services",
+                ftr_legal: "Legal",
+                lg_kvkk_t: "KVKK Notice",
+                lg_privacy_t: "Privacy Policy",
+                lg_cookie_t: "Cookie Policy",
+                lg_terms_t: "Terms of Use",
+                lg_rights_t: "Data Subject Request",
                 ftr_whatsapp: "Message us on WhatsApp",
                 ftr_address: "Second New Cairo, Cairo, Egypt",
                 ftr_scope: "Türkiye & International Consultancy",
@@ -863,6 +911,12 @@
                 ftr_portal_short: "بوابة NSCS ←",
                 ftr_tagline: "استشارات الاستدامة والتدقيق للشركات",
                 ftr_services: "خدماتنا",
+                ftr_legal: "قانوني",
+                lg_kvkk_t: "إشعار حماية البيانات (KVKK)",
+                lg_privacy_t: "سياسة الخصوصية",
+                lg_cookie_t: "سياسة ملفات الارتباط",
+                lg_terms_t: "شروط الاستخدام",
+                lg_rights_t: "طلب صاحب البيانات",
                 ftr_whatsapp: "راسلنا على واتساب",
                 ftr_address: "القاهرة الجديدة الثانية، القاهرة، مصر",
                 ftr_scope: "تركيا والاستشارات الدولية",
