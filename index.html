@@ -512,15 +512,16 @@
 
     <!-- Footer -->
     <footer id="iletisim" class="bg-slate-950 text-slate-400 py-20 border-t border-slate-900">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
-            <div class="space-y-4">
-                <!-- Footer Logo Alanı (Sabitlendi) -->
+        <div class="max-w-7xl mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="space-y-5">
+                <!-- Footer Logo Alanı -->
                 <a href="#" class="flex items-center gap-3">
                     <img src="nscs-logo-beyaz.png" alt="NSCSTR Logo" class="h-16 w-auto object-contain">
                 </a>
                 <p class="text-xs leading-relaxed text-slate-400" data-i18n="ftr_about">
                     Inditex, Higg FEM, Sedex, BSCI, GOTS, GRS, OCS, RCS, BCI ve ISO standartlarında kurumsal danışmanlık ortağınız.
                 </p>
+                <div class="flex flex-wrap gap-2"><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">Inditex</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">Higg FEM</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">Sedex</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">BSCI</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">GOTS</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">GRS</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">OCS</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">RCS</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">BCI</span><span class="px-2.5 py-1 rounded-full border border-slate-800 bg-slate-900/70 text-[11px] font-bold text-slate-300">ISO</span></div>
             </div>
 
             <div>
@@ -530,15 +531,35 @@
                     <li><a href="#hizmetler" class="hover:text-brand-500 transition" data-i18n="nav_services">Hizmetlerimiz</a></li>
                     <li><a href="#referanslar" class="hover:text-brand-500 transition" data-i18n="nav_references">Referanslarımız</a></li>
                     <li><button onclick="openCertModal()" class="hover:text-brand-500 transition text-left" data-i18n="nav_certs_btn">Sertifikalarımız</button></li>
+                    <li><a href="#iletisim" class="hover:text-brand-500 transition" data-i18n="btn_offer">Teklif Alın</a></li>
+                    <li><a href="https://abdllhbydgn.github.io/nscsportal/" target="_blank" rel="noopener" class="hover:text-brand-500 transition" data-i18n="nav_portal">NSCS Portal</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold text-sm mb-4" data-i18n="ftr_services">Hizmetlerimiz</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">Inditex Denetim Danışmanlığı</a></li>
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">Higg FEM Danışmanlığı</a></li>
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">Sedex Denetimi Danışmanlığı</a></li>
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">BSCI Danışmanlığı</a></li>
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">OCS, RCS, GOTS ve GRS</a></li>
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">Better Cotton Initiative (BCI)</a></li>
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">ISO Yönetim Sistemleri</a></li>
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">Karbon Ayak İzi &amp; Sürdürülebilirlik</a></li>
+                    <li><a href="#hizmetler" class="hover:text-brand-500 transition">Sosyal Uygunluk Eğitimi</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="text-white font-bold text-sm mb-4" data-i18n="ftr_contact">İletişim Detayları</h4>
                 <ul class="space-y-3 text-xs">
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-envelope text-brand-500"></i><span>info@nscstr.com</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-envelope text-brand-500"></i><a href="mailto:info@nscstr.com" class="hover:text-brand-500 transition">info@nscstr.com</a></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-globe text-brand-500"></i><span>www.nscstr.com</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-location-dot text-brand-500"></i><span>Türkiye & Uluslararası Danışmanlık</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-phone text-brand-500"></i><a href="tel:+201206403742" class="hover:text-brand-500 transition" dir="ltr">+20 (120) 640 37 42</a></li>
+                    <li class="flex items-center space-x-3"><i class="fa-brands fa-whatsapp text-brand-500"></i><a href="https://wa.me/201206403742" target="_blank" rel="noopener" class="hover:text-brand-500 transition" data-i18n="ftr_whatsapp">WhatsApp ile yazın</a></li>
+                    <li class="flex items-start space-x-3"><i class="fa-solid fa-location-dot text-brand-500 mt-0.5"></i><a href="https://www.google.com/maps/search/?api=1&amp;query=30.092750%2C31.677761" target="_blank" rel="noopener" class="hover:text-brand-500 transition leading-relaxed" data-i18n="ftr_address">İkinci Yeni Kahire, Kahire, Mısır</a></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-earth-europe text-brand-500"></i><span data-i18n="ftr_scope">Türkiye &amp; Uluslararası Danışmanlık</span></li>
                 </ul>
             </div>
         </div>
@@ -763,6 +784,10 @@
                 nav_portal: "NSCS Portal",
                 ftr_portal_short: "NSCS Portal →",
                 ftr_tagline: "Kurumsal Sürdürülebilirlik & Denetim Danışmanlığı",
+                ftr_services: "Hizmetlerimiz",
+                ftr_whatsapp: "WhatsApp ile yazın",
+                ftr_address: "İkinci Yeni Kahire, Kahire, Mısır",
+                ftr_scope: "Türkiye & Uluslararası Danışmanlık",
                 hero_badge: "NSCSTR Denetim & Danışmanlık",
                 hero_title: "Küresel Standartlarda Sürdürülebilir Dönüşüm",
                 hero_desc: "NSCSTR; Inditex, Sedex, BSCI, Higg FEM, ISO Yönetim Sistemleri, Karbon Ayak İzi ve Sürdürülebilirlik Sertifikasyonlarında (GOTS, GRS, OCS, RCS, BCI) işletmenize tam uyumluluk ve denetim garantisi sunar.",
@@ -799,6 +824,10 @@
                 nav_portal: "NSCS Portal",
                 ftr_portal_short: "NSCS Portal →",
                 ftr_tagline: "Corporate Sustainability & Audit Consultancy",
+                ftr_services: "Our Services",
+                ftr_whatsapp: "Message us on WhatsApp",
+                ftr_address: "Second New Cairo, Cairo, Egypt",
+                ftr_scope: "Türkiye & International Consultancy",
                 hero_badge: "NSCSTR Audit & Consultancy",
                 hero_title: "Sustainable Transformation in Global Standards",
                 hero_desc: "NSCSTR provides full compliance and audit guarantees for Inditex, Sedex, BSCI, Higg FEM, ISO Systems, Carbon Footprint, and Sustainability Certifications.",
@@ -835,6 +864,10 @@
                 nav_portal: "بوابة NSCS",
                 ftr_portal_short: "بوابة NSCS ←",
                 ftr_tagline: "استشارات الاستدامة والتدقيق للشركات",
+                ftr_services: "خدماتنا",
+                ftr_whatsapp: "راسلنا على واتساب",
+                ftr_address: "القاهرة الجديدة الثانية، القاهرة، مصر",
+                ftr_scope: "تركيا والاستشارات الدولية",
                 hero_badge: "NSCSTR التدقيق والاستشارات",
                 hero_title: "التحول المستدام بالمعايير العالمية",
                 hero_desc: "تقدم NSCSTR ضمانًا كاملاً للتدقيق والامتثال لمعايير Inditex و Sedex و BSCI و Higg FEM ونظم ISO وشهادات الاستدامة.",
