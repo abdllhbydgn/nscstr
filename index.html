@@ -751,7 +751,7 @@
             const btn = document.getElementById('nscstr-lead-submit-btn');
             const originalBtnText = btn.innerText;
             btn.disabled = true;
-            btn.innerText = 'Gönderiliyor...';
+            btn.innerText = MSG[window._lang || 'tr'].sending;
 
             fetch('https://formsubmit.co/ajax/info@nscstr.com', {
                 method: 'POST',
@@ -760,11 +760,11 @@
             })
             .then(res => res.json())
             .then(() => {
-                alert('Talebiniz alınmıştır. En kısa sürede iletişime geçilecektir.');
+                alert(MSG[window._lang || 'tr'].ok);
                 form.reset();
             })
             .catch(() => {
-                alert('Bir sorun oluştu. Lütfen doğrudan info@nscstr.com adresine yazın veya tekrar deneyin.');
+                alert(MSG[window._lang || 'tr'].fail);
             })
             .finally(() => {
                 btn.disabled = false;
@@ -954,9 +954,43 @@
             }
         };
 
+
+        // Sayfa içeriğinin tamamı (başlıklar, kartlar, sertifikalar, referanslar, form) TR/EN/AR çevrilir /
+        // Whole-page translation (titles, cards, certificates, references, form) for TR/EN/AR
+        const PAGE_DICT = {"%100 Denetim Başarısı": {"en": "100% Audit Success", "ar": "نجاح التدقيق 100%"}, "Akademi Eğitmenlik Takdiri": {"en": "Academy Trainer Recognition", "ar": "تقدير مدرّب الأكاديمية"}, "Akademi Teşekkür": {"en": "Academy Appreciation", "ar": "شكر الأكاديمية"}, "BCI Pamuk": {"en": "BCI Cotton", "ar": "قطن BCI"}, "BCI Platformu (BCCP) üyelik ve veri takibi, pamuk izlenebilirliği, tedarik zinciri entegrasyonu ve Better Cotton ilkelerine uyum rehberliği.": {"en": "BCI Platform (BCCP) membership and data tracking, cotton traceability, supply chain integration and guidance on compliance with the Better Cotton principles.", "ar": "عضوية منصة BCI (BCCP) ومتابعة البيانات، وإمكانية تتبّع القطن، وتكامل سلسلة الإمداد، والإرشاد للالتزام بمبادئ Better Cotton."}, "BSCI Danışmanlığı": {"en": "BSCI Consultancy", "ar": "استشارات BSCI"}, "Baş Denetçi Sertifikası": {"en": "Lead Auditor Certificate", "ar": "شهادة كبير المدققين"}, "Better Cotton Initiative (BCI)": {"en": "Better Cotton Initiative (BCI)", "ar": "مبادرة القطن الأفضل (BCI)"}, "Bilgi Sertifikası": {"en": "Certificate of Knowledge", "ar": "شهادة معرفة"}, "Danışmanlık Eğitimi": {"en": "Consultancy Training", "ar": "تدريب استشاري"}, "Detaylı Bilgi Alın": {"en": "Get Details", "ar": "احصل على التفاصيل"}, "Endüstri & Tekstil": {"en": "Industry & Textile", "ar": "الصناعة والنسيج"}, "Enerji Yönetim Sistemi Baş Denetçisi": {"en": "Energy Management System Lead Auditor", "ar": "كبير مدققي نظام إدارة الطاقة"}, "Enerji Yönetimi": {"en": "Energy Management", "ar": "إدارة الطاقة"}, "Erkek Giyim & Moda": {"en": "Menswear & Fashion", "ar": "ملابس رجالية وأزياء"}, "Eğitmen Takdir Belgesi": {"en": "Trainer Recognition Certificate", "ar": "شهادة تقدير مدرّب"}, "Eğitmen Teşekkür Belgesi": {"en": "Trainer Appreciation Certificate", "ar": "شهادة شكر مدرّب"}, "Eğitmenlik": {"en": "Training", "ar": "التدريب"}, "GOTS, GRS, OCS, RCS, BCI izlenebilirlik uzmanlığı.": {"en": "Traceability expertise in GOTS, GRS, OCS, RCS and BCI.", "ar": "خبرة في إمكانية التتبّع لمعايير GOTS وGRS وOCS وRCS وBCI."}, "Global Perakende": {"en": "Global Retail", "ar": "تجزئة عالمية"}, "Gıda & Zincir": {"en": "Food & Chain", "ar": "أغذية وسلاسل"}, "Higg FEM Danışmanlığı": {"en": "Higg FEM Consultancy", "ar": "استشارات Higg FEM"}, "Higg Index Çevresel Tesis Modülü (FEM) veri girişi, enerji, su, atık su, emisyon ve kimyasal yönetimi performans analizi ile doğrulama desteği.": {"en": "Higg Index Facility Environmental Module (FEM) data entry, performance analysis of energy, water, wastewater, emissions and chemical management, and verification support.", "ar": "إدخال بيانات وحدة Higg Index البيئية للمنشآت (FEM) وتحليل أداء الطاقة والمياه والصرف والانبعاثات وإدارة الكيماويات مع دعم التحقق."}, "Holding & Üretim": {"en": "Holding & Manufacturing", "ar": "قابضة وتصنيع"}, "ISO 14001:2015 ÇYS": {"en": "ISO 14001:2015 EMS", "ar": "ISO 14001:2015 نظام إدارة البيئة"}, "ISO 45001:2018 İSG": {"en": "ISO 45001:2018 OHS", "ar": "ISO 45001:2018 الصحة والسلامة المهنية"}, "ISO 50001:2018 EYYS": {"en": "ISO 50001:2018 EnMS", "ar": "ISO 50001:2018 نظام إدارة الطاقة"}, "ISO 9001:2015 KYS": {"en": "ISO 9001:2015 QMS", "ar": "ISO 9001:2015 نظام إدارة الجودة"}, "ISO 14064 Kurumsal Karbon Ayak İzi hesaplama, AB Yeşil Mutabakat uyum danışmanlığı, SKDM ve Sürdürülebilirlik Raporlaması (GRI / ESG) hizmetleri.": {"en": "ISO 14064 corporate carbon footprint calculation, EU Green Deal compliance consultancy, CBAM and sustainability reporting (GRI / ESG) services.", "ar": "حساب البصمة الكربونية للمؤسسات وفق ISO 14064، واستشارات الامتثال للاتفاق الأخضر الأوروبي، وآلية CBAM، وخدمات تقارير الاستدامة (GRI / ESG)."}, "ISO 9001 (Kalite), ISO 14001 (Çevre), ISO 45001 (İSG) ve ISO 50001 (Enerji) yönetim sistemlerinin kurulumu, dokümantasyonu ve iç denetim danışmanlığı.": {"en": "Setup, documentation and internal audit consultancy for ISO 9001 (Quality), ISO 14001 (Environment), ISO 45001 (OHS) and ISO 50001 (Energy) management systems.", "ar": "تأسيس أنظمة الإدارة وتوثيقها واستشارات التدقيق الداخلي: ISO 9001 (الجودة) وISO 14001 (البيئة) وISO 45001 (السلامة والصحة المهنية) وISO 50001 (الطاقة)."}, "ISO 9001 Sistem Kurulum Uzmanlığı": {"en": "ISO 9001 System Setup Expertise", "ar": "خبرة تأسيس نظام ISO 9001"}, "ISO Standartları": {"en": "ISO Standards", "ar": "معايير ISO"}, "ISO Yönetim Sistemleri": {"en": "ISO Management Systems", "ar": "أنظمة إدارة ISO"}, "ISO Yönetim Sistemleri Danışmanlığı": {"en": "ISO Management Systems Consultancy", "ar": "استشارات أنظمة إدارة ISO"}, "Inditex Denetim Danışmanlığı": {"en": "Inditex Audit Consultancy", "ar": "استشارات تدقيق Inditex"}, "Inditex standartlarına uygun fabrika saha düzenlemesi, ÇSS hazırlığı, iş sağlığı-güvenliği eksiklik tespiti ve denetim öncesi ön analiz.": {"en": "Factory site arrangement in line with Inditex standards, CSS preparation, identification of health and safety gaps and pre-audit analysis.", "ar": "تنظيم موقع المصنع وفق معايير Inditex، والتحضير لبرنامج CSS، وتحديد أوجه القصور في الصحة والسلامة، وتحليل ما قبل التدقيق."}, "Inditex, Sedex ve BSCI denetimlerine eksiksiz hazırlık.": {"en": "Complete preparation for Inditex, Sedex and BSCI audits.", "ar": "تحضير متكامل لتدقيقات Inditex وSedex وBSCI."}, "KYS Kurulum & Danışmanlık": {"en": "QMS Setup & Consultancy", "ar": "تأسيس نظام إدارة الجودة والاستشارات"}, "KYS Kurulumu": {"en": "QMS Setup", "ar": "تأسيس نظام إدارة الجودة"}, "Kalite Mühendisliği": {"en": "Quality Engineering", "ar": "هندسة الجودة"}, "Kalite Yönetim Sistemi Baş Denetçisi": {"en": "Quality Management System Lead Auditor", "ar": "كبير مدققي نظام إدارة الجودة"}, "Karbon Ayak İzi & Sürdürülebilirlik": {"en": "Carbon Footprint & Sustainability", "ar": "البصمة الكربونية والاستدامة"}, "Kumaş & Dokuma": {"en": "Fabric & Weaving", "ar": "أقمشة ونسيج"}, "Kurumsal Eğitim": {"en": "Corporate Training", "ar": "تدريب مؤسسي"}, "Kurumsal Karbon Ayak İzi ve Sürdürülebilirlik": {"en": "Corporate Carbon Footprint and Sustainability", "ar": "البصمة الكربونية للمؤسسات والاستدامة"}, "Lean Management": {"en": "Lean Management", "ar": "الإدارة الرشيقة"}, "NSCSTR Kurumsal Danışmanlık": {"en": "NSCSTR Corporate Consultancy", "ar": "NSCSTR للاستشارات المؤسسية"}, "NSCSTR Uzmanlığı": {"en": "NSCSTR Expertise", "ar": "خبرة NSCSTR"}, "OCS, RCS, GOTS ve GRS": {"en": "OCS, RCS, GOTS and GRS", "ar": "OCS وRCS وGOTS وGRS"}, "OCS, RCS, GOTS ve GRS Danışmanlığı": {"en": "OCS, RCS, GOTS and GRS Consultancy", "ar": "استشارات OCS وRCS وGOTS وGRS"}, "Organik (GOTS, OCS) ve Geri Dönüştürülmüş (GRS, RCS) ürün standartlarında kütle dengesi (Mass Balance) ve işlem belgeleri (TC/SC) danışmanlığı.": {"en": "Consultancy on mass balance and transaction certificates (TC/SC) for Organic (GOTS, OCS) and Recycled (GRS, RCS) product standards.", "ar": "استشارات حول توازن الكتلة (Mass Balance) ووثائق المعاملات (TC/SC) لمعايير المنتجات العضوية (GOTS وOCS) والمعاد تدويرها (GRS وRCS)."}, "Pencereyi Kapat": {"en": "Close Window", "ar": "إغلاق النافذة"}, "Sedex Denetimi Danışmanlığı": {"en": "Sedex Audit Consultancy", "ar": "استشارات تدقيق Sedex"}, "Sedex/SMETA 2-Pillar ve 4-Pillar denetimleri için saha uygunlaştırma, Öz Değerlendirme Anketi (SAQ) doldurma ve CAPR takibi.": {"en": "Site readiness for Sedex/SMETA 2-Pillar and 4-Pillar audits, completing the Self-Assessment Questionnaire (SAQ) and CAPR follow-up.", "ar": "تهيئة الموقع لتدقيقات Sedex/SMETA ذات الركيزتين والأربع ركائز، وتعبئة استبيان التقييم الذاتي (SAQ)، ومتابعة خطة الإجراءات التصحيحية (CAPR)."}, "Sistem Kurucu": {"en": "System Builder", "ar": "مؤسس الأنظمة"}, "Sosyal & Çevre": {"en": "Social & Environment", "ar": "اجتماعي وبيئي"}, "Sosyal Uygunluk": {"en": "Social Compliance", "ar": "الامتثال الاجتماعي"}, "Sosyal Uygunluk Eğitimi": {"en": "Social Compliance Training", "ar": "تدريب الامتثال الاجتماعي"}, "Sürdürülebilir Tekstil": {"en": "Sustainable Textile", "ar": "نسيج مستدام"}, "Tekstil": {"en": "Textile", "ar": "نسيج"}, "Tekstil & Konfeksiyon": {"en": "Textile & Garments", "ar": "نسيج وملابس جاهزة"}, "Tekstil & Perakende": {"en": "Textile & Retail", "ar": "نسيج وتجزئة"}, "Uluslararası Akredite": {"en": "Internationally Accredited", "ar": "معتمد دوليًا"}, "Uluslararası Sertifikasyon": {"en": "International Certification", "ar": "شهادة دولية"}, "Yalın Yönetim": {"en": "Lean Management", "ar": "الإدارة الرشيقة"}, "Yalın Üretim & Danışmanlık Eğitimi": {"en": "Lean Production & Consultancy Training", "ar": "تدريب الإنتاج الرشيق والاستشارات"}, "Yeşil Mutabakat & ESG": {"en": "Green Deal & ESG", "ar": "الاتفاق الأخضر وESG"}, "Yöneticilik Sertifikası": {"en": "Management Certificate", "ar": "شهادة إدارية"}, "Yönetim ekibi ve çalışanlara yönelik İSG, zorla çalıştırmayı önleme, ayrımcılıkla mücadele, çevre bilinci ve denetim farkındalık eğitimleri.": {"en": "Training for management and employees on occupational health and safety, preventing forced labour, combating discrimination, environmental awareness and audit awareness.", "ar": "تدريب الإدارة والعاملين على السلامة والصحة المهنية ومنع العمل القسري ومكافحة التمييز والوعي البيئي والوعي بالتدقيق."}, "amfori BSCI Davranış Kuralları çerçevesinde çalışan hakları, İSG, çevre ilkeleri ve yönetim sistemlerinin kurulması.": {"en": "Establishing workers’ rights, OHS, environmental principles and management systems under the amfori BSCI Code of Conduct.", "ar": "ترسيخ حقوق العمال والسلامة المهنية والمبادئ البيئية وأنظمة الإدارة وفق مدونة سلوك amfori BSCI."}, "© 2026 NSCSTR. Tüm hakları saklıdır.": {"en": "© 2026 NSCSTR. All rights reserved.", "ar": "© 2026 NSCSTR. جميع الحقوق محفوظة."}, "Çevre Yönetim Sistemi Baş Denetçisi": {"en": "Environmental Management System Lead Auditor", "ar": "كبير مدققي نظام إدارة البيئة"}, "Çevre Yönetimi": {"en": "Environmental Management", "ar": "الإدارة البيئية"}, "Çevresel Etki": {"en": "Environmental Impact", "ar": "الأثر البيئي"}, "Üniversite Onaylı": {"en": "University Approved", "ar": "معتمد جامعيًا"}, "Üniversite Onaylı Uzmanlık Eğitimi": {"en": "University-Approved Specialist Training", "ar": "تدريب تخصصي معتمد جامعيًا"}, "Üretim & İplik": {"en": "Manufacturing & Yarn", "ar": "تصنيع وغزل"}, "İş Sağlığı & Güvenliği": {"en": "Occupational Health & Safety", "ar": "الصحة والسلامة المهنية"}, "İş Sağlığı ve Güvenliği Baş Denetçisi": {"en": "Occupational Health and Safety Lead Auditor", "ar": "كبير مدققي الصحة والسلامة المهنية"}, "Ad Soyad / Firma Adı": {"en": "Full Name / Company Name", "ar": "الاسم الكامل / اسم الشركة"}, "E-Posta Adresi": {"en": "E-mail Address", "ar": "البريد الإلكتروني"}, "Hizmet Alanı Seçin": {"en": "Select Service Area", "ar": "اختر مجال الخدمة"}, "NSCSTR Danışmanlık Ekibi": {"en": "NSCSTR Consultancy Team", "ar": "فريق NSCSTR الاستشاري"}, "Arapça Öğreniyorum": {"en": "Learning Arabic", "ar": "أتعلم العربية"}, "Kapat": {"en": "Close", "ar": "إغلاق"}};
+        const MSG = {
+            tr: { sending: 'Gönderiliyor...', ok: 'Talebiniz alınmıştır. En kısa sürede iletişime geçilecektir.', fail: 'Bir sorun oluştu. Lütfen doğrudan info@nscstr.com adresine yazın veya tekrar deneyin.', title: 'NSCSTR - Kurumsal Sürdürülebilirlik & Denetim Danışmanlığı | nscstr.com' },
+            en: { sending: 'Sending...', ok: 'Your request has been received. We will contact you shortly.', fail: 'Something went wrong. Please write directly to info@nscstr.com or try again.', title: 'NSCSTR - Corporate Sustainability & Audit Consultancy | nscstr.com' },
+            ar: { sending: 'جارٍ الإرسال...', ok: 'تم استلام طلبك. سنتواصل معك في أقرب وقت.', fail: 'حدث خطأ. يُرجى مراسلتنا مباشرة على info@nscstr.com أو المحاولة مرة أخرى.', title: 'NSCSTR - استشارات الاستدامة والتدقيق للشركات | nscstr.com' }
+        };
+        const _normTxt = t => String(t).replace(/\s+/g, ' ').trim();
+        function translatePage(lang) {
+            const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+            let n;
+            while ((n = w.nextNode())) {
+                const pe = n.parentElement;
+                if (!pe || /^(SCRIPT|STYLE)$/.test(pe.tagName) || pe.closest('[data-i18n]')) continue;
+                if (n._o === undefined) { const k = _normTxt(n.textContent); if (!PAGE_DICT[k]) continue; n._o = n.textContent; n._k = k; }
+                if (n._o === undefined) continue;
+                const lead = n._o.match(/^\s*/)[0], trail = n._o.match(/\s*$/)[0];
+                n.textContent = lang === 'tr' ? n._o : lead + (PAGE_DICT[n._k][lang] || n._k) + trail;
+            }
+            document.querySelectorAll('[placeholder],[title],[alt],[aria-label]').forEach(e => {
+                ['placeholder', 'title', 'alt', 'aria-label'].forEach(a => {
+                    const od = 'data-o-' + a;
+                    let v = e.getAttribute(a); if (v === null) return;
+                    if (!e.hasAttribute(od)) { if (!PAGE_DICT[_normTxt(v)]) return; e.setAttribute(od, v); }
+                    const o = e.getAttribute(od);
+                    e.setAttribute(a, lang === 'tr' ? o : (PAGE_DICT[_normTxt(o)] ? (PAGE_DICT[_normTxt(o)][lang] || o) : o));
+                });
+            });
+            document.title = MSG[lang].title;
+        }
+
         function setLanguage(lang) {
             document.documentElement.lang = lang;
             document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+            window._lang = lang;
 
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
@@ -973,6 +1007,7 @@
                     btn.className = "px-2.5 py-1 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition";
                 }
             });
+            translatePage(lang);
         }
     </script>
 </body>
