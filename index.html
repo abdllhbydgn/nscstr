@@ -80,7 +80,20 @@
         .lux-ul::after { content: ''; display: block; height: 3px; width: 0; margin: .9rem 0 0; border-radius: 99px; background: linear-gradient(90deg, #ea580c, #fb923c); transition: width 1s .3s cubic-bezier(.2,.7,.2,1); }
         .lux-in .lux-ul::after, .lux-in.lux-ul::after { width: 4.5rem; }
         .lux-parallax { will-change: transform; }
-        @media (prefers-reduced-motion: reduce) { .lux-r { opacity: 1; transform: none; transition: none; } .lux-orb, .lux-shimmer, #teklif { animation: none; } .lux-btn::after { display: none; } }
+
+        /* şerit: yalnız transform kullanır (ekran kartını yormaz) */
+        .lux-marquee { position: relative; overflow: hidden; background: #020617; border-top: 1px solid rgba(255,255,255,.06); border-bottom: 1px solid rgba(255,255,255,.06); padding: 18px 0; }
+        .lux-marquee::before, .lux-marquee::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+        .lux-marquee::before { left: 0; background: linear-gradient(90deg, #020617, transparent); }
+        .lux-marquee::after { right: 0; background: linear-gradient(270deg, #020617, transparent); }
+        .lux-track { display: flex; width: max-content; gap: 56px; animation: luxMarquee 38s linear infinite; will-change: transform; }
+        .lux-marquee:hover .lux-track { animation-play-state: paused; }
+        .lux-track span { display: inline-flex; align-items: center; gap: 56px; font-weight: 800; letter-spacing: .14em; font-size: 13px; color: #94a3b8; white-space: nowrap; text-transform: uppercase; }
+        .lux-track span::after { content: ''; width: 6px; height: 6px; border-radius: 99px; background: #ea580c; display: inline-block; }
+        @keyframes luxMarquee { to { transform: translate3d(-50%, 0, 0); } }
+        .lux-paused, .lux-paused * { animation-play-state: paused !important; }
+        @media (max-width: 767px) { .lux-orb { display: none; } .lux-grid { opacity: .3; } .lux-track { animation-duration: 30s; } #teklif { animation: none; } }
+        @media (prefers-reduced-motion: reduce) { .lux-r { opacity: 1; transform: none; transition: none; } .lux-orb, .lux-shimmer, #teklif, .lux-track { animation: none; } .lux-btn::after { display: none; } }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-brand-500 selection:text-white relative">
@@ -1121,6 +1134,21 @@
             es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('lux-in'); io.unobserve(e.target); } });
         }, { threshold: .12, rootMargin: '0px 0px -6% 0px' }) : null;
         document.querySelectorAll('.lux-r').forEach(function (el) { if (io) io.observe(el); else el.classList.add('lux-in'); });
+
+        // standartlar şeridi (hero'nun hemen altında)
+        if (hero) {
+            var names = ['Inditex', 'Higg FEM', 'Sedex SMETA', 'BSCI', 'GOTS', 'GRS', 'OCS', 'RCS', 'Better Cotton (BCI)', 'ISO 9001', 'ISO 14001', 'ISO 45001', 'ISO 50001'];
+            var line = '<span>' + names.join('</span><span>') + '</span>';
+            var m = document.createElement('div'); m.className = 'lux-marquee'; m.setAttribute('aria-hidden', 'true');
+            m.innerHTML = '<div class="lux-track">' + line + line + '</div>';
+            hero.parentNode.insertBefore(m, hero.nextSibling);
+        }
+        // ekranda olmayan animasyonlar durur (pil ve işlemci tasarrufu)
+        if ('IntersectionObserver' in window) {
+            var po = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('lux-paused', !e.isIntersecting); }); }, { threshold: 0 });
+            [hero, document.querySelector('.lux-marquee')].forEach(function (el) { if (el) po.observe(el); });
+        }
+        document.addEventListener('visibilitychange', function () { document.documentElement.classList.toggle('lux-paused', document.hidden); });
         // 4) kart ışığı ve eğim (yalnız fareli cihazlar)
         if (!touch && !reduce) {
             document.querySelectorAll('.lux-card').forEach(function (c) {
