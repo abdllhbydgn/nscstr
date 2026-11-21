@@ -53,10 +53,15 @@
     <!-- Üst Bilgi Barı -->
     <div class="bg-slate-950 text-slate-300 py-2.5 px-6 border-b border-slate-800 text-xs">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-6">
+            <div class="hidden md:flex items-center space-x-6">
                 <span class="flex items-center"><i class="fa-solid fa-envelope text-brand-500 mr-2"></i> info@nscstr.com</span>
                 <span class="hidden md:flex items-center"><i class="fa-solid fa-globe text-brand-500 mr-2"></i> www.nscstr.com</span>
                 <span class="hidden lg:flex items-center"><i class="fa-solid fa-shield-halved text-brand-500 mr-2"></i> NSCSTR Kurumsal Danışmanlık</span>
+            </div>
+            <div class="flex items-center gap-3 sm:gap-5 md:ms-auto md:me-4" id="clocks" aria-label="Saatler">
+                <div class="flex items-center gap-2"><svg class="w-[22px] h-[15px] rounded-[2px] ring-1 ring-white/20 shrink-0" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.7" fill="#CE1126"/><rect y="6.7" width="30" height="6.6" fill="#fff"/><rect y="13.3" width="30" height="6.7" fill="#000"/><circle cx="15" cy="10" r="2" fill="#C09300"/></svg><div class="leading-none"><span class="ck-l hidden sm:block text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-slate-400 whitespace-nowrap" data-k="cai">MISIR · KAHİRE</span><b class="block text-[13px] sm:text-[15px] font-extrabold text-white tabular-nums mt-0.5" data-tz="Africa/Cairo" dir="ltr">--:--:--</b></div></div>
+                <div class="flex items-center gap-2 ps-3 sm:ps-5 border-s border-slate-700"><svg class="w-[22px] h-[15px] rounded-[2px] ring-1 ring-white/20 shrink-0" viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#E30A17"/><circle cx="11.3" cy="10" r="5" fill="#fff"/><circle cx="12.8" cy="10" r="4" fill="#E30A17"/><path d="M17.6 10l3.9-1.3-2.4 3.3v-4l2.4 3.3z" fill="#fff"/></svg><div class="leading-none"><span class="ck-l hidden sm:block text-[8.5px] sm:text-[9.5px] font-bold tracking-wider text-slate-400 whitespace-nowrap" data-k="ist">TÜRKİYE · İSTANBUL</span><b class="block text-[13px] sm:text-[15px] font-extrabold text-white tabular-nums mt-0.5" data-tz="Europe/Istanbul" dir="ltr">--:--:--</b></div></div>
+                <span id="ckDate" class="hidden lg:inline text-[11px] font-bold text-slate-300 bg-slate-800 rounded-full px-3 py-1 whitespace-nowrap"></span>
             </div>
             <div class="flex items-center space-x-2 font-semibold">
                 <button onclick="setLanguage('tr')" id="btn-tr" class="px-2.5 py-1 rounded bg-brand-600 text-white hover:bg-brand-500 transition">TR</button>
@@ -1037,6 +1042,23 @@
             });
             translatePage(lang);
         }
+    </script>
+
+    <script>
+    // Üst bar saatleri: Mısır · Kahire ve Türkiye · İstanbul
+    (function () {
+        var els = Array.prototype.slice.call(document.querySelectorAll('#clocks b[data-tz]')), dEl = document.getElementById('ckDate');
+        var L = { tr: { cai: 'MISIR · KAHİRE', ist: 'TÜRKİYE · İSTANBUL', loc: 'tr-TR' }, en: { cai: 'EGYPT · CAIRO', ist: 'TÜRKİYE · ISTANBUL', loc: 'en-GB' }, ar: { cai: 'مصر · القاهرة', ist: 'تركيا · إسطنبول', loc: 'ar-EG-u-nu-latn' } };
+        var fm = {};
+        els.forEach(function (e) { try { fm[e.getAttribute('data-tz')] = new Intl.DateTimeFormat('en-GB', { timeZone: e.getAttribute('data-tz'), hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' }); } catch (x) {} });
+        function tick() {
+            var now = new Date(), lg = L[window._lang] || L.tr;
+            els.forEach(function (e) { var f = fm[e.getAttribute('data-tz')]; if (f) e.innerHTML = f.format(now).split(':').join('<i style="font-style:normal;color:#ff7a1a">:</i>'); });
+            document.querySelectorAll('#clocks .ck-l').forEach(function (s) { s.textContent = lg[s.getAttribute('data-k')]; });
+            if (dEl) { try { dEl.textContent = new Intl.DateTimeFormat(lg.loc, { day: 'numeric', month: 'long', year: 'numeric' }).format(now); } catch (x) {} }
+        }
+        tick(); setInterval(tick, 1000);
+    })();
     </script>
 </body>
 </html>
